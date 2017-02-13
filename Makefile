@@ -6,6 +6,7 @@ NAME		= SHAWDHM
 BINS		= $(BINPATH)/$(NAME)
 
 CFLAGS	= -g
+PREFIX	= /opt/bin/
 
 ifeq ($(FC),f77)
 	FC=gfortran
@@ -61,7 +62,10 @@ CC	= gcc $(DEBUG)
 all: test
 
 test: $(OBJ) 
-	$(FC) -o ./PreGBHM.exe $(OBJ_O) PreGBHM.F90 $(CFLAGS) $(NETCDF_FLAG) $(FLAGS) 
+	$(FC) -o ./PreGBHM $(OBJ_O) PreGBHM.F90 $(CFLAGS) $(NETCDF_FLAG) $(FLAGS) 
 	
 clean:
 	rm -rf *.o *~ $(OBJ)
+	
+install:
+	sudo cp ./PreGBHM $(PREFIX)
