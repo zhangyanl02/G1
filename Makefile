@@ -61,7 +61,7 @@ CC	= gcc $(DEBUG)
 all: test
 
 test: $(OBJ) 
-	$(FC) -o ../../test.exe $(OBJ_O) ./test.F90 $(CFLAGS) $(NETCDF_FLAG) $(FLAGS) 
+	$(FC) -o ./PreGBHM.exe $(OBJ_O) PreGBHM.F90 $(CFLAGS) $(NETCDF_FLAG) $(FLAGS) 
 	
 clean:
 	rm -rf *.o *~ $(OBJ)

@@ -1,4 +1,4 @@
-      program test
+      program PreGBHM
       use gisutil
       use mod_preprocess
       !integer,parameter::NX=538,NY=698
@@ -105,4 +105,4 @@
  102  PRINT *,'Error reading NAMELIST file. Program stopped.'
       STOP
       
-      end program
+      end program PreGBHM
