@@ -66,6 +66,7 @@ test: $(OBJ)
 	
 clean:
 	rm -rf *.o *~ $(OBJ)
+	rm ./PreGBHM
 	
 install:
 	sudo cp ./PreGBHM $(PREFIX)

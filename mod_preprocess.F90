@@ -366,7 +366,7 @@ end subroutine
       character*12:: snodata
       character *12:: nstr
       integer:: numlev(10)
-      character(80)::filename
+      character(200)::filename
       integer:: upbasin(9)
         
       ncols='ncols'
@@ -556,7 +556,7 @@ end subroutine
       enddo
 
       call strlen(hydro_para_dir,d1,d2)
-      open(10,file=trim(hydro_para_dir(d1:d2))//'/basinup.txt',status='replace')
+      !open(10,file=trim(hydro_para_dir(d1:d2))//'/basinup.txt',status='replace')
       do k =1,nsub
         upbasin(:)=0
         if(nbasinup(k) > 0) then
@@ -564,9 +564,9 @@ end subroutine
             upbasin(i)=basinup(k,i)
           enddo
         endif
-        write(10,*)nbasin(k),nbasinup(k),upbasin(:)
+        !write(10,*)nbasin(k),nbasinup(k),upbasin(:)
       enddo
-      close(10)
+      !close(10)
 !cccccc determine the level ccccccc
 
       call leveldetermine(nsub,outlet,level,nbasinup,basinup,basinpnext,basinlevel,nbasin,drainage,pbasin,numlev)
@@ -580,11 +580,11 @@ end subroutine
         endif
       enddo
 
-      open(18,file=trim(hydro_para_dir(d1:d2))//'/basinlevel.txt',status='unknown')
-      do k =1,nsub
-        write(18,*)nbasin(k),basinlevel(k),pbasin(k)
-      enddo
-      close(18)
+      !open(18,file=trim(hydro_para_dir(d1:d2))//'/basinlevel.txt',status='unknown')
+      !do k =1,nsub
+      !  write(18,*)nbasin(k),basinlevel(k),pbasin(k)
+      !enddo
+      !close(18)
       psubbasin(:,:)=-9999
       do i =1,nr
         do j = 1,nc
@@ -594,7 +594,7 @@ end subroutine
             endif
           enddo
         enddo
-      enddo        
+      enddo
 
       
       open(18, file=trim(hydro_para_dir(d1:d2))//'/pbasin.asc', status='unknown')
@@ -663,18 +663,18 @@ end subroutine
       enddo
       close(10)      
         
-      open(10,file=trim(hydro_para_dir(d1:d2))//'/drainage.txt',status='replace')
+      !open(10,file=trim(hydro_para_dir(d1:d2))//'/drainage.txt',status='replace')
       do k =1,level
         do i =1,numlev(k)
           j=j+1
           do p = 1,nsub
             if(pbasin(p)== k*1000+i) then
-              write(10,*)pbasin(p),drainage(p)
+              !write(10,*)pbasin(p),drainage(p)
             endif
           enddo
         enddo ! 
       enddo
-      close(10)       
+      !close(10)       
 
       if(allocated(nbasin))deallocate(nbasin)
       if(allocated(psubbasin))deallocate(psubbasin)
@@ -1312,7 +1312,8 @@ end subroutine
         endif
 
         call strlen(skyviewfile,l1,l2)
-        if(l2>0) then
+        inquire(file=skyviewfile(l1:l2), exist=file_e)
+        if(file_e) then
           infile=skyviewfile
           outfile="skyview_blockmean.nc"
           call Blockmean(infile,outfile,int(coarseRes/FineRes),int(coarseRes/FineRes),2)
@@ -1728,11 +1729,11 @@ end subroutine
       write(3,*) maxnum,maxnp
       close(3)
       
-      open(10,file=trim(hydro_para_dir(d1:d2))//'/outinterval.txt',status='replace')
-      do i = 1, nsub
-         write(10,*) (outinterval(i,j),j=1,5)
-      end do
-      close(10)
+      !open(10,file=trim(hydro_para_dir(d1:d2))//'/outinterval.txt',status='replace')
+      !do i = 1, nsub
+      !   write(10,*) (outinterval(i,j),j=1,5)
+      !end do
+      !close(10)
       if(allocated(outinterval))deallocate(outinterval)
       !if(allocated(outdistance))deallocate(outdistance)
     end subroutine
